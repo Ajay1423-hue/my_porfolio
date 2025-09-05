@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { height: 100%; scroll-behavior: smooth; }
+
+body { transition: background-color 0.4s, color 0.4s; }
+
+.card { @apply rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm transition transform hover:scale-[1.02] hover:shadow-lg; }
+
+.section-title { @apply text-3xl font-bold mb-6 text-center; }
+
+.btn { @apply px-4 py-2 rounded-md font-medium transition; }
+.btn-primary { @apply bg-blue-600 text-white hover:bg-blue-700; }
+.btn-outline { @apply border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800; }
+
+/* Animated background blobs */
+.blob { position:absolute; border-radius:50%; filter:blur(50px); opacity:0.4; animation: blobFloat 12s ease-in-out infinite; }
+.blob1{background:linear-gradient(135deg,#60a5fa,#7c3aed);width:400px;height:400px;top:-100px;left:-100px;}
+.blob2{background:linear-gradient(135deg,#34d399,#06b6d4);width:350px;height:350px;bottom:-100px;right:-120px;animation-delay:2s;}
+@keyframes blobFloat { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-30px) scale(1.05);} }
