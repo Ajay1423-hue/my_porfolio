@@ -23,7 +23,7 @@ export default function Projects(){
       outcome: "Helped job seekers & recruiters understand trending roles and salary expectations globally."
     },
     {
-      title: "HR Analytics Dashboard",
+      title: "HR-Analytics Dashboard",
       category: "Dashboard",
       desc: "Analyzes employee data for attrition, recruitment, and workforce performance.",
       img: "/HR-Analytic.png",
