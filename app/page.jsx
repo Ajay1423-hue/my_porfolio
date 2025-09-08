@@ -43,7 +43,7 @@ export default function Home() {
         {/* Profile Photo */}
         <div className="flex justify-center mb-6">
           <img
-            src="/profile.jpg"
+            src="/image.jpeg"
             alt="Ajay Sable"
             className="w-32 h-32 rounded-full border-4 border-blue-600 shadow-lg object-cover"
           />
