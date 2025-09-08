@@ -6,17 +6,18 @@ const site = {
   experience: [
     {
       role: "Data Analyst Intern",
-      company: "ABC Corp",
+      company: "Greatway Software Pvt.Ltd",
       duration: "6 months",
       details: [
-        "Built Power BI dashboards",
-        "Performed SQL queries and reporting",
-        "MIS reporting for business teams"
+        "Designed MIS and Power BI dashboards that reduced manual reporting time by 30%",
+        "Used SQL (joins, filtering) &Excel (validation, pivot tables) to prepare accurate weekly MIS performance reports",
+        "Extracted and validated datasets using SQL and Excel, ensuring 100% accuracy for weekly client MIS reports",
+        "Automated recurring reports, reducing manual effort by 4 hours per week"
       ]
     },
     {
       role: "Ads Promoter",
-      company: "XYZ Digital",
+      company: "Freelance",
       duration: "Freelance",
       details: [
         "Created ad campaigns",
