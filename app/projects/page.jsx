@@ -42,6 +42,7 @@ export default function Projects(){
       category: "Dashboard",
       desc: "Measures customer satisfaction & feedback through sentiment breakdown.",
       img: "/Customer-Sentiment.png",
+      video: "/Customer Sentiment Analysis Dashboard.mp4",  
       tools: "Power BI, SQL, Word Cloud Visual, Kaggle datasets",
       github: "https://github.com/Ajay1423-hue/Customer-Sentiment-Dashboard",  // ✅ Added GitHub lin
       features: [
