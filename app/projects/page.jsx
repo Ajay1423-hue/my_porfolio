@@ -1,7 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { FaGithub } from "react-icons/fa";  // ✅ Added GitHub icon
+import { FaGithub } from "react-icons/fa";
 
 export default function Projects(){
   const [activeProject, setActiveProject] = useState(null);
@@ -13,6 +13,7 @@ export default function Projects(){
       category: "Dashboard",
       desc: "Explores the global AI job market with salary insights by country, role, and industry.",
       img: "/Global-AI.png",
+      video: "/videos/ai-dashboard.mp4",   // ✅ Example video
       tools: "Power BI Maps, DAX, Power Query, Kaggle datasets",
       features: [
         "📊 Interactive dashboard with maps & slicers",
@@ -23,12 +24,13 @@ export default function Projects(){
       outcome: "Helped job seekers & recruiters understand trending roles and salary expectations globally."
     },
     {
-      title: "HR-Analytics Dashboard",
+      title: "HR Analytics Dashboard",
       category: "Dashboard",
       desc: "Analyzes employee data for attrition, recruitment, and workforce performance.",
       img: "/HR-Analytic.png",
+      video: "/Customer-Sentiment-Analysis-Dashboard.mp4",
       tools: "Power BI, Power Query, Excel, KPI Cards",
-      github: "https://github.com/Ajay1423-hue/HR-Analytics-Dashboard",  // ✅ Added GitHub link
+      github: "https://github.com/Ajay1423-hue/HR-Analytics-Dashboard",
       features: [
         "👥 Employee overview by dept, gender, age",
         "📉 Attrition drilldowns by location & tenure",
@@ -42,9 +44,8 @@ export default function Projects(){
       category: "Dashboard",
       desc: "Measures customer satisfaction & feedback through sentiment breakdown.",
       img: "/Customer-Sentiment.png",
-      video: "/Customer-Sentiment-Analysis-Dashboard.mp4",  
+      github: "https://github.com/Ajay1423-hue/Customer-Sentiment-Dashboard",
       tools: "Power BI, SQL, Word Cloud Visual, Kaggle datasets",
-      github: "https://github.com/Ajay1423-hue/Customer-Sentiment-Dashboard",  // ✅ Added GitHub lin
       features: [
         "🗣️ Sentiment breakdown (Positive/Neutral/Negative)",
         "⭐ Metrics: NPS, CSAT, CES",
@@ -136,10 +137,26 @@ export default function Projects(){
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-6">
           <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-2xl w-full p-6 relative overflow-y-auto max-h-[90vh]">
             <button onClick={()=>setActiveProject(null)} className="absolute top-4 right-4 text-gray-500">✖</button>
+            
             <h2 className="text-2xl font-bold mb-2 dark:text-white">{activeProject.title}</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-4 italic">{activeProject.category}</p>
             <p className="mb-4 text-gray-700 dark:text-gray-300">{activeProject.desc}</p>
-            
+
+            {/* ✅ Video or Image */}
+            {activeProject.video ? (
+              <video 
+                src={activeProject.video} 
+                controls 
+                className="w-full rounded-xl shadow-md mb-6"
+              />
+            ) : (
+              <img 
+                src={activeProject.img} 
+                alt={activeProject.title} 
+                className="w-full rounded-xl shadow-md mb-6"
+              />
+            )}
+
             <h3 className="font-semibold dark:text-white">🛠 Tools Used:</h3>
             <p className="mb-4 text-gray-600 dark:text-gray-300">{activeProject.tools}</p>
 
