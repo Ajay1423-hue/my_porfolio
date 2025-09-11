@@ -13,7 +13,7 @@ export default function Projects(){
       category: "Dashboard",
       desc: "Explores the global AI job market with salary insights by country, role, and industry.",
       img: "/Global-AI.png",
-      video: "/videos/ai-dashboard.mp4",   // ✅ Example video
+      video: "/Global-AI-Salary-Trends.mp4",   // ✅ Example video
       tools: "Power BI Maps, DAX, Power Query, Kaggle datasets",
       features: [
         "📊 Interactive dashboard with maps & slicers",
@@ -28,7 +28,7 @@ export default function Projects(){
       category: "Dashboard",
       desc: "Analyzes employee data for attrition, recruitment, and workforce performance.",
       img: "/HR-Analytic.png",
-      video: "/Customer-Sentiment-Analysis-Dashboard.mp4",
+      video: "/HR-Analytics-Dashboard.mp4",
       tools: "Power BI, Power Query, Excel, KPI Cards",
       github: "https://github.com/Ajay1423-hue/HR-Analytics-Dashboard",
       features: [
@@ -45,6 +45,7 @@ export default function Projects(){
       desc: "Measures customer satisfaction & feedback through sentiment breakdown.",
       img: "/Customer-Sentiment.png",
       github: "https://github.com/Ajay1423-hue/Customer-Sentiment-Dashboard",
+      video: "/Customer-Sentiment-Analysis.mp4",
       tools: "Power BI, SQL, Word Cloud Visual, Kaggle datasets",
       features: [
         "🗣️ Sentiment breakdown (Positive/Neutral/Negative)",
