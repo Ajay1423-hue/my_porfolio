@@ -1,5 +1,5 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { FaGithub } from "react-icons/fa";
 
@@ -13,7 +13,7 @@ export default function Projects(){
       category: "Dashboard",
       desc: "Explores the global AI job market with salary insights by country, role, and industry.",
       img: "/Global-AI.png",
-      video: "/Global-AI-Salary-Trends.mp4",   // ✅ Example video
+      video: "/Global-AI-Salary-Trends.mp4",
       tools: "Power BI Maps, DAX, Power Query, Kaggle datasets",
       features: [
         "📊 Interactive dashboard with maps & slicers",
@@ -89,15 +89,48 @@ export default function Projects(){
     : projects.filter(p => p.category === filter);
 
   return (
-    <section className="relative min-h-screen py-16 px-6">
+    <section className="relative min-h-screen py-16 px-6 overflow-hidden">
+      {/* 🔵 Animated Background Blobs */}
+      <motion.div
+        className="absolute top-20 left-10 w-72 h-72 bg-blue-500/30 rounded-full filter blur-3xl"
+        animate={{ x: [0, 40, -30, 0], y: [0, 20, -40, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-20 right-10 w-80 h-80 bg-purple-500/30 rounded-full filter blur-3xl"
+        animate={{ x: [0, -50, 30, 0], y: [0, -40, 20, 0] }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute top-1/3 left-1/2 w-64 h-64 bg-pink-500/20 rounded-full filter blur-3xl"
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto">
-        <h1 className="section-title dark:text-white text-center">Projects</h1>
+        {/* Title */}
+        <motion.h1
+          className="section-title dark:text-white text-center"
+          initial={{ opacity: 0, y: -40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          Projects
+        </motion.h1>
         
         {/* Filter Tabs */}
-        <div className="flex justify-center gap-4 mb-10">
+        <motion.div 
+          className="flex justify-center gap-4 mb-10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
           {["All","Dashboard","Ad Campaign"].map(cat=>(
-            <button key={cat}
+            <motion.button key={cat}
               onClick={()=>setFilter(cat)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
               className={`px-5 py-2 rounded-xl border transition ${
                 filter===cat 
                   ? "bg-indigo-600 text-white border-indigo-600" 
@@ -105,18 +138,21 @@ export default function Projects(){
               }`}
             >
               {cat}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Project Grid */}
         <div className="grid md:grid-cols-3 gap-6">
           {filteredProjects.map((p,i)=>(
-            <motion.div key={i} className="card overflow-hidden flex flex-col"
-              initial={{ opacity:0, y:40 }}
-              whileInView={{ opacity:1, y:0 }}
-              transition={{ duration:0.6, delay:i*0.2 }}>
-              
+            <motion.div key={i}
+              className="card overflow-hidden flex flex-col cursor-pointer"
+              initial={{ opacity:0, scale: 0.9 }}
+              whileInView={{ opacity:1, scale:1 }}
+              whileHover={{ scale: 1.05, rotateZ: 1 }}
+              transition={{ duration:0.6, delay:i*0.15 }}
+              onClick={()=>setActiveProject(p)}
+            >
               <div className="bg-gray-200 dark:bg-gray-800 h-40 flex items-center justify-center text-gray-500">
                 {p.img ? <img src={p.img} alt={p.title} className="h-full w-full object-cover"/> : "Image Placeholder"}
               </div>
@@ -124,67 +160,107 @@ export default function Projects(){
               <div className="p-4 flex flex-col flex-grow">
                 <h3 className="font-semibold text-lg dark:text-white">{p.title}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300 flex-grow">{p.desc}</p>
-                <button onClick={()=>setActiveProject(p)} className="btn btn-outline mt-4">
+                <motion.button 
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn btn-outline mt-4"
+                >
                   View More
-                </button>
+                </motion.button>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Modal for Project Details */}
-      {activeProject && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-6">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-2xl w-full p-6 relative overflow-y-auto max-h-[90vh]">
-            <button onClick={()=>setActiveProject(null)} className="absolute top-4 right-4 text-gray-500">✖</button>
-            
-            <h2 className="text-2xl font-bold mb-2 dark:text-white">{activeProject.title}</h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-4 italic">{activeProject.category}</p>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">{activeProject.desc}</p>
+      {/* Modal */}
+      <AnimatePresence>
+        {activeProject && (
+          <motion.div 
+            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div 
+              className="bg-white dark:bg-gray-900 rounded-2xl max-w-2xl w-full p-6 relative overflow-y-auto max-h-[90vh]"
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 50, opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <button 
+                onClick={()=>setActiveProject(null)} 
+                className="absolute top-4 right-4 text-gray-500"
+              >
+                ✖
+              </button>
+              
+              <h2 className="text-2xl font-bold mb-2 dark:text-white">{activeProject.title}</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4 italic">{activeProject.category}</p>
+              <p className="mb-4 text-gray-700 dark:text-gray-300">{activeProject.desc}</p>
 
-            {/* ✅ Video or Image */}
-            {activeProject.video ? (
-              <video 
-                src={activeProject.video} 
-                controls 
-                className="w-full rounded-xl shadow-md mb-6"
-              />
-            ) : (
-              <img 
-                src={activeProject.img} 
-                alt={activeProject.title} 
-                className="w-full rounded-xl shadow-md mb-6"
-              />
-            )}
+              {/* ✅ Video or Image */}
+              {activeProject.video ? (
+                <motion.video 
+                  src={activeProject.video} 
+                  controls 
+                  className="w-full rounded-xl shadow-md mb-6"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                />
+              ) : (
+                <motion.img 
+                  src={activeProject.img} 
+                  alt={activeProject.title} 
+                  className="w-full rounded-xl shadow-md mb-6"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                />
+              )}
 
-            <h3 className="font-semibold dark:text-white">🛠 Tools Used:</h3>
-            <p className="mb-4 text-gray-600 dark:text-gray-300">{activeProject.tools}</p>
+              <h3 className="font-semibold dark:text-white">🛠 Tools Used:</h3>
+              <p className="mb-4 text-gray-600 dark:text-gray-300">{activeProject.tools}</p>
 
-            <h3 className="font-semibold dark:text-white">✨ Key Features:</h3>
-            <ul className="list-disc list-inside mb-4 text-gray-600 dark:text-gray-300">
-              {activeProject.features.map((f,idx)=>(<li key={idx}>{f}</li>))}
-            </ul>
+              <h3 className="font-semibold dark:text-white">✨ Key Features:</h3>
+              <ul className="list-disc list-inside mb-4 text-gray-600 dark:text-gray-300">
+                {activeProject.features.map((f,idx)=>(
+                  <motion.li key={idx}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.1 }}
+                  >
+                    {f}
+                  </motion.li>
+                ))}
+              </ul>
 
-            <h3 className="font-semibold dark:text-white">🎯 Outcome:</h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">{activeProject.outcome}</p>
+              <h3 className="font-semibold dark:text-white">🎯 Outcome:</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">{activeProject.outcome}</p>
 
-            {/* ✅ GitHub link */}
-            {activeProject.github && (
-              <div className="mt-4">
-                <a 
-                  href={activeProject.github} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:underline"
+              {/* ✅ GitHub link */}
+              {activeProject.github && (
+                <motion.div className="mt-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
                 >
-                  <FaGithub size={20}/> View on GitHub
-                </a>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+                  <a 
+                    href={activeProject.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:underline"
+                  >
+                    <FaGithub size={20}/> View on GitHub
+                  </a>
+                </motion.div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
