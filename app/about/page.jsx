@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { FaDatabase, FaChartBar, FaFileExcel, FaBullhorn, FaProjectDiagram } from "react-icons/fa";
+import { FaDatabase, FaChartBar, FaFileExcel, FaBullhorn } from "react-icons/fa";
 import { BiBarChartAlt2 } from "react-icons/bi";
 import { MdOutlineReport, MdCampaign } from "react-icons/md";
 
@@ -50,22 +50,23 @@ export default function About() {
       <div className="blob blob2"></div>
 
       <div className="relative z-10 max-w-5xl mx-auto">
-        {/* Title */}
+        {/* Title with Typing Animation */}
         <motion.h1
           className="section-title dark:text-white text-center"
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ width: 0 }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 2, ease: "easeInOut" }}
+          style={{ overflow: "hidden", whiteSpace: "nowrap", borderRight: "2px solid #3b82f6" }}
         >
           About Me
         </motion.h1>
 
         {/* About Text */}
         <motion.p
-          className="text-lg text-gray-700 dark:text-gray-300 text-center leading-relaxed"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
+          className="text-lg text-gray-700 dark:text-gray-300 text-center leading-relaxed mt-6"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
         >
           I’m <span className="font-semibold text-blue-600">Ajay Sable</span>, a passionate Data Analyst with experience in building dashboards and ad campaigns.
         </motion.p>
@@ -75,7 +76,7 @@ export default function About() {
           className="mt-12 text-2xl font-bold text-center dark:text-white"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
         >
           My Skills
         </motion.h2>
@@ -85,10 +86,10 @@ export default function About() {
             <motion.div
               key={i}
               className="card p-6 rounded-2xl shadow-md bg-white/80 dark:bg-gray-800/60 backdrop-blur-md"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              whileHover={{ scale: 1.05 }}
+              initial={{ rotateY: 90, opacity: 0 }}
+              whileInView={{ rotateY: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: i * 0.2 }}
+              whileHover={{ scale: 1.08, rotateZ: 1 }}
             >
               <div className="flex items-center justify-center mb-4">
                 {skill.icon}
@@ -100,12 +101,12 @@ export default function About() {
                 {skill.sub.map((sub, j) => (
                   <motion.li
                     key={j}
-                    initial={{ opacity: 0, x: -10 }}
+                    initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: (i * 0.2) + j * 0.1 }}
+                    transition={{ delay: (i * 0.3) + j * 0.15 }}
                     className="flex items-center gap-2"
                   >
-                    <span className="text-blue-500">•</span> {sub}
+                    <span className="text-blue-500">✔</span> {sub}
                   </motion.li>
                 ))}
               </ul>
